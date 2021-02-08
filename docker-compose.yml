@@ -1,0 +1,34 @@
+version: "3.2"
+
+services:
+  web:
+    container_name: ${CONTAINER_NAME_WEB}
+    network_mode: ${DOCKER_NETWORK_MODE}
+    build:
+      context: docker
+      dockerfile: Dockerfile
+    environment:
+      ORACLE_HOME: /usr/local/instantclient/
+      DYLD_LIBRARY_PATH: /usr/local/instantclient/
+      LD_LIBRARY_PATH: /usr/local/instantclient/
+      PHP_IDE_CONFIG: "serverName=${XDEBUG_SERVER_NAME}"
+      XDEBUG_CONFIG: "client_host=${XDEBUG_HOST} client_port=9000"
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - "./:/var/www/html"
+    - "/var/www/html/docker/mysql"
+  db:
+    container_name: ${CONTAINER_NAME_DB}
+    network_mode: ${DOCKER_NETWORK_MODE}
+    image: mysql:5.6
+    command: "--innodb_file_per_table=1 --skip-name-resolve --max_allowed_packet=64M --lower_case_table_names=2 --sql_mode=''"
+    ports:
+    - 3306:${MYSQL_CONTAINER_PORT}
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+    - "./docker/mysql:/var/lib/mysql"
+    - "./:/mnt/local" # just for db dump/restore
