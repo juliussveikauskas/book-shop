@@ -34,6 +34,14 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
             'edit' => 'admin.genre.edit',
             'update' => 'admin.genre.update'
         ]);
+        Route::resource('authors', App\Http\Controllers\Admin\AuthorsController::class)->names([
+            'index' => 'admin.authors',
+            'create' => 'admin.author.create',
+            'store' => 'admin.author.store',
+            'destroy' => 'admin.author.delete',
+            'edit' => 'admin.author.edit',
+            'update' => 'admin.author.update'
+        ]);
     });
 
 });
