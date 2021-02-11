@@ -10004,3 +10004,7 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.admin-edit-btn {
+  float: left;
+  margin-right: 10px;
+}

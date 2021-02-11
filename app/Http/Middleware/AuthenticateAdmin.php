@@ -2,28 +2,26 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 
-class AuthenticateAdmin extends Authenticate
+class AuthenticateAdmin extends Middleware
 {
-    protected $userTypes = ['ADMIN', 'DEV', 'CUSTOMER'];
 
-    protected function redirectTo($request)
+    public function handle($request, \Closure $next, ...$guards)
     {
-        if (!$request->expectsJson()) {
-            return route('admin.login');
+        if (auth()->user()) {
+            $role = Auth::user()->role;
+            switch ($role) {
+                case 'ADMIN':
+                    return $next($request);
+                    break;
+                case 'CUSTOMER':
+                    return redirect('/member');
+                    break;
+            }
         }
+        return redirect('/');
     }
 
-    protected function authenticate($request, array $guards)
-    {
-        $guards = ['admin'];
-        parent::authenticate($request, $guards);
-
-//        if (!in_array($this->auth->user()->type, $this->userTypes)) {
-//            throw new AuthenticationException(
-//                'Unauthenticated.', $guards, $this->redirectTo($request)
-//            );
-//        }
-    }
 }

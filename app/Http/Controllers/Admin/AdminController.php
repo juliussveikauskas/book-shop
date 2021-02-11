@@ -28,21 +28,7 @@ class AdminController extends Controller
 
     public function login()
     {
-        return view('admin.login');
+        return view('auth.login');
     }
 
-    public function postLogin(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        return redirect()->route('admin.dashboard');
-    }
-
-    public function logout()
-    {
-        auth()->guard('admin')->logout();
-        return redirect()->route('admin.login');
-    }
 }

@@ -21,13 +21,19 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
     Auth::routes();
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::get('admin/login', [App\Http\Controllers\Admin\AdminController::class, 'login'])->name('admin.login');
-    Route::post('admin/login', [App\Http\Controllers\Admin\AdminController::class, 'postLogin'])->name('admin.post-login');
-    Route::get('admin/logout', [App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
 
-    Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth.admin'], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
         Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
+        Route::resource('genres', App\Http\Controllers\Admin\GenresController::class)->names([
+            'index' => 'admin.genres',
+            'create' => 'admin.genre.create',
+            'store' => 'admin.genre.store',
+            'destroy' => 'admin.genre.delete',
+            'edit' => 'admin.genre.edit',
+            'update' => 'admin.genre.update'
+        ]);
     });
-
 
 });
