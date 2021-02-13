@@ -16,7 +16,7 @@ class GenresController extends Controller
     public function index(Genre $genre)
     {
         $genres = $genre->orderBy('name', 'ASC')->paginate(20);
-        return view('admin.genre.index', compact('genres'));
+        return view('admin.genres.index', compact('genres'));
     }
 
     /**
@@ -26,7 +26,7 @@ class GenresController extends Controller
      */
     public function create()
     {
-        return view('admin.genre.form');
+        return view('admin.genres.form');
     }
 
     /**
@@ -60,7 +60,7 @@ class GenresController extends Controller
      */
     public function edit(Genre $genre)
     {
-        return view('admin.genre.form', compact('genre'));
+        return view('admin.genres.form', compact('genre'));
     }
 
     /**

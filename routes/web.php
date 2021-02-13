@@ -42,6 +42,15 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
             'edit' => 'admin.author.edit',
             'update' => 'admin.author.update'
         ]);
+
+        Route::resource('books', App\Http\Controllers\Admin\BooksController::class)->names([
+            'index' => 'admin.books',
+            'create' => 'admin.book.create',
+            'store' => 'admin.book.store',
+            'destroy' => 'admin.book.delete',
+            'edit' => 'admin.book.edit',
+            'update' => 'admin.book.update'
+        ]);
     });
 
 });

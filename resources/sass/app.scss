@@ -6,6 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+//Chosen
+@import "~chosen-js/chosen.min.css";
+//Datepicker
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css";
 
 @import 'admin.scss';
 

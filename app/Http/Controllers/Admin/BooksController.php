@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author;
+use App\Models\Book;
+use App\Models\Genre;
+use App\Repository\Books;
 use Illuminate\Http\Request;
 
-class AuthorsController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Author $author)
+    public function index(Book $book)
     {
-        $authors = $author->orderBy('name', 'ASC')->paginate(20);
-        return view('admin.authors.index', compact('authors'));
+        $books = $book->orderBy('name', 'ASC')->paginate(20);
+        return view('admin.books.index', compact('books'));
     }
 
     /**
@@ -24,9 +27,11 @@ class AuthorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Author $author, Genre $genre)
     {
-        return view('admin.authors.form');
+        $authors = $author->get();
+        $genres = $genre->get();
+        return view('admin.books.form', compact('authors', 'genres'));
     }
 
     /**
@@ -35,10 +40,14 @@ class AuthorsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Author $author)
+    public function store(Request $request, Books $books)
     {
-        $author->create($request->all());
-        return redirect()->route('admin.authors');
+        $input = $request->all();
+        if($request->hasFile('image')){
+            $input['file'] = $request->file('image');
+        }
+        $books->create($input);
+        return redirect()->route('admin.books');
     }
 
     /**
@@ -58,9 +67,9 @@ class AuthorsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit(Book $book)
     {
-        return view('admin.authors.form', compact('author'));
+        return view('admin.books.form', compact('book'));
     }
 
     /**
@@ -70,10 +79,10 @@ class AuthorsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, Book $book)
     {
-        $author->update($request->all());
-        return redirect()->route('admin.authors');
+        $book->update($request->all());
+        return redirect()->route('admin.books');
     }
 
     /**
@@ -82,9 +91,9 @@ class AuthorsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy(Book $book)
     {
-        $author->delete();
-        return redirect()->route('admin.authors');
+        $book->delete();
+        return redirect()->route('admin.books');
     }
 }
