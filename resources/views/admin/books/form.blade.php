@@ -5,11 +5,16 @@
     @else
         <h1 class="mt-2">Update book</h1>
     @endif
-    <form method="POST" action="  @if(!empty($book)) {{route('admin.book.update', [$book])}}@else {{route('admin.book.store')}}   @endif"  enctype="multipart/form-data">
+    <form method="POST" action="  @if(!empty($book)) {{route('admin.book.update', [$book])}}@else {{route('admin.book.store')}}   @endif" enctype="multipart/form-data">
         @if(!empty($book))
             {{ method_field('PUT') }}
         @endif
         @csrf
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger" role="alert">
+                {{ $error }}
+            </div>
+        @endforeach
         <div class="form-row">
             <div class="form-group col-md-7">
                 <label for="name">Title</label>

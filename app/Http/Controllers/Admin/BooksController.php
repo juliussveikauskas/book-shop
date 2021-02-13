@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookStoreRequest;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
@@ -40,10 +41,10 @@ class BooksController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Books $books)
+    public function store(BookStoreRequest $request, Books $books)
     {
         $input = $request->all();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $input['file'] = $request->file('image');
         }
         $books->create($input);
