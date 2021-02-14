@@ -68,9 +68,11 @@ class BooksController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Book $book, Author $author, Genre $genre)
     {
-        return view('admin.books.form', compact('book'));
+        $authors = $author->orderBy('name', 'ASC')->get();
+        $genres = $genre->orderBy('name', 'ASC')->get();
+        return view('admin.books.form', compact('book','authors', 'genres'));
     }
 
     /**

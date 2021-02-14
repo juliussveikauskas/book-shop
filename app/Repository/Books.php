@@ -21,7 +21,7 @@ class Books
             $destinationPath = storage_path('app/public');
             $data['file']->move($destinationPath, $data['image']);
         }
-        $book = $this->book->create($data);
+        $book = auth()->user()->books()->create($data);
         if (!empty($data['authorIds'])) {
             $book->authors()->sync($data['authorIds']);
         }
@@ -29,5 +29,27 @@ class Books
             $book->genres()->sync($data['genreIds']);
         }
         return $book;
+    }
+
+    public function collectBooks($params = [])
+    {
+        $query = $this->book;
+
+        if (!empty($params['status'])) {
+            $query = $query->where('status', $params['status']);
+        }
+
+        if (!empty($params['search'])) {
+            $query = $query->where(function ($q) use ($params) {
+                $q->where('books.name', 'LIKE', '%' . $params['search'] . '%');
+                $q->orWhereHas('authors', function ($select) use ($params) {
+                    $select->where('authors.name', 'LIKE', '%' . $params['search'] . '%');
+                });
+            });
+        }
+
+        $query->orderBy('created_at', 'DESC');
+
+        return $query;
     }
 }

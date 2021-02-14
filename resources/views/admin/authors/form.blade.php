@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+    @if(empty($author))
+        <h1 class="mt-2">Add author</h1>
+    @else
+        <h1 class="mt-2">Update author</h1>
+    @endif
     <form method="POST" action="  @if(!empty($author)) {{route('admin.author.update', [$author])}}@else {{route('admin.author.store')}}   @endif">
         @if(!empty($author))
             {{ method_field('PUT') }}
@@ -13,6 +18,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="{{route('admin.authors')}}" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
 @endsection

@@ -9,7 +9,11 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'written_at', 'image', 'discount', 'rating', 'description', 'status','price'];
+    const ACTIVE = 'active';
+    const INACTIVE = 'inactive';
+    const UNCONFIRMED = 'unconfirmed';
+
+    protected $fillable = ['name', 'written_at', 'image', 'discount', 'rating', 'description', 'status', 'price', 'user_id'];
 
     public function reviews()
     {
@@ -26,4 +30,18 @@ class Book extends Model
         return $this->belongsToMany(Genre::class, 'book_genre', 'book_id', 'genre_id');
     }
 
+    public function user()
+    {
+        $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function isNew()
+    {
+        return $this->created_at > date('Y-m-d', strtotime('-7 days'));
+    }
+
+    public function getDiscountedPriceAttribute()
+    {
+        return round($this->price - ($this->price * ($this->discount / 100)), 2);
+    }
 }

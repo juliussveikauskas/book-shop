@@ -30,7 +30,7 @@
                 <label for="authors">Authors</label>
                 <select multiple id="authors" name="authorIds[]" class="form-control js-chosen" data-placeholder="Choose authors...">
                     @foreach($authors as $author)
-                        <option value="{{$author->id}}">{{$author->name}}</option>
+                        <option value="{{$author->id}}" @if(!empty($book) && $book->authors->contains($author->id)) selected @endif>{{$author->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -38,7 +38,7 @@
                 <label for="genres">Genres</label>
                 <select multiple id="genres" name="genreIds[]" class="form-control js-chosen" data-placeholder="Choose genres...">
                     @foreach($genres as $genre)
-                        <option value="{{$genre->id}}">{{$genre->name}}</option>
+                        <option value="{{$genre->id}}" @if(!empty($book) && $book->genres->contains($genre->id)) selected @endif>{{$genre->name}}</option>
                     @endforeach
                 </select>
             </div>

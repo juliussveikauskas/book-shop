@@ -23,11 +23,13 @@
                     <td>{{$genre->name}}</td>
                     <td>
                         <a href="{{route('admin.genre.edit', [$genre])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
-                        <form action="{{route('admin.genre.delete', [$genre])}}" method="POST">
-                            {{ method_field('DELETE') }}
-                            @csrf
-                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                        </form>
+                        @if(!count($genre->books))
+                            <form action="{{route('admin.genre.delete', [$genre])}}" method="POST">
+                                {{ method_field('DELETE') }}
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

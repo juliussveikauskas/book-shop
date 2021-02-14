@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
     Auth::routes();
 

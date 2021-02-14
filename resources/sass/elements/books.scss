@@ -1,0 +1,53 @@
+.books-list {
+    &__book {
+        margin-bottom: 15px;
+
+        .card {
+            height: 100%;
+            margin-bottom: 15px;
+            position: relative;
+
+            .card-img-top {
+                height: 250px;
+                object-fit: cover;
+            }
+
+            .card-link {
+                position: absolute;
+                bottom: 10px;
+            }
+
+            .card-new {
+                position: absolute;
+                background-color: #38c172;
+                padding: 5px;
+                color: #fff;
+                border: 1px solid;
+                border-radius: 5px;
+                right: 0;
+                font-size: 18px;
+            }
+
+            .card-discount {
+                position: absolute;
+                background-color: #ff0000;
+                color: #fff;
+                font-size: 16px;
+                padding: 1px 15px;
+                border: 1px solid;
+                border-radius: 5px;
+                top: 220px;
+                right: 0;
+            }
+
+            .old-price {
+                color: #6c757d;
+                text-decoration: line-through;
+            }
+
+            .discounted-price {
+                color: #ff0000;
+            }
+        }
+    }
+}
