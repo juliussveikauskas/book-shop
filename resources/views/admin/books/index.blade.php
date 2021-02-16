@@ -3,7 +3,7 @@
     <h1 class="mt-2">Books List</h1>
     <div class="row">
         <div class="col-xs-12 my-3 mx-3">
-            <a href="{{route('admin.book.create')}}" class="btn btn-success">Create book</a>
+            <a href="{{route('admin.books.create')}}" class="btn btn-success">Create book</a>
         </div>
     </div>
     @if(count($books))
@@ -22,9 +22,9 @@
                     <th scope="row">{{$loop->index}}</th>
                     <td>{{$book->name}}
                     <td>
-                        <a href="{{route('admin.book.edit', [$book])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
+                        <a href="{{route('admin.books.edit', [$book])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
                         @if(!count($book->genres) || !count($book->authors))
-                            <form action="{{route('admin.book.delete', [$book])}}" method="POST">
+                            <form action="{{route('admin.books.destroy', [$book])}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type="submit">Delete</button>

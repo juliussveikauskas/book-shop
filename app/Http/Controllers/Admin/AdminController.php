@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return redirect()->route('admin.books');
+        return redirect()->route('admin.books.index');
     }
 
     public function login()

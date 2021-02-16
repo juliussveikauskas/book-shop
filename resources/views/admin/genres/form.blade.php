@@ -5,7 +5,7 @@
     @else
         <h1 class="mt-2">Update genre</h1>
     @endif
-    <form method="POST" action="  @if(!empty($genre)) {{route('admin.genre.update', [$genre])}}@else {{route('admin.genre.store')}}   @endif">
+    <form method="POST" action="  @if(!empty($genre)) {{route('admin.genres.update', [$genre])}}@else {{route('admin.genres.store')}}   @endif">
         @if(!empty($genre))
             {{ method_field('PUT') }}
         @endif

@@ -19,7 +19,7 @@ class BooksController extends Controller
      */
     public function index(Book $book)
     {
-        $books = $book->orderBy('name', 'ASC')->paginate(20);
+        $books = $book->with('authors', 'genres')->orderBy('name', 'ASC')->paginate(20);
         return view('admin.books.index', compact('books'));
     }
 
@@ -48,7 +48,7 @@ class BooksController extends Controller
             $input['file'] = $request->file('image');
         }
         $books->create($input);
-        return redirect()->route('admin.books');
+        return redirect()->route('admin.books.index');
     }
 
     /**
@@ -85,7 +85,7 @@ class BooksController extends Controller
     public function update(Request $request, Book $book)
     {
         $book->update($request->all());
-        return redirect()->route('admin.books');
+        return redirect()->route('admin.books.index');
     }
 
     /**
@@ -97,6 +97,6 @@ class BooksController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('admin.books');
+        return redirect()->route('admin.books.index');
     }
 }

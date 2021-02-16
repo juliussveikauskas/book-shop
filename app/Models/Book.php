@@ -13,6 +13,8 @@ class Book extends Model
     const INACTIVE = 'inactive';
     const UNCONFIRMED = 'unconfirmed';
 
+    protected $perPage = 10;
+
     protected $fillable = ['name', 'written_at', 'image', 'discount', 'rating', 'description', 'status', 'price', 'user_id'];
 
     public function reviews()
@@ -43,5 +45,10 @@ class Book extends Model
     public function getDiscountedPriceAttribute()
     {
         return round($this->price - ($this->price * ($this->discount / 100)), 2);
+    }
+
+    public function scopeActive()
+    {
+        return $this->where('status', self::ACTIVE);
     }
 }

@@ -31,13 +31,9 @@ class Books
         return $book;
     }
 
-    public function collectBooks($params = [])
+    public function activeBooks($params = [], $paginate = false)
     {
-        $query = $this->book;
-
-        if (!empty($params['status'])) {
-            $query = $query->where('status', $params['status']);
-        }
+        $query = $this->book->active()->with('authors');
 
         if (!empty($params['search'])) {
             $query = $query->where(function ($q) use ($params) {
@@ -48,8 +44,12 @@ class Books
             });
         }
 
-        $query->orderBy('created_at', 'DESC');
+        $query = $query->orderBy('created_at', 'DESC');
 
-        return $query;
+        if(!empty($paginate)){
+            return $query->paginate();
+        }
+
+        return $query->count();
     }
 }

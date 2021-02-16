@@ -14,9 +14,9 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="mr-2"><a href="{{route('admin.books')}}">Books</a></li>
-                    <li class="mr-2"><a href="{{route('admin.genres')}}">Genres</a></li>
-                    <li class="mr-2"><a href="{{route('admin.authors')}}">Authors</a></li>
+                    <li class="mr-2"><a href="{{route('admin.books.index')}}">Books</a></li>
+                    <li class="mr-2"><a href="{{route('admin.genres.index')}}">Genres</a></li>
+                    <li class="mr-2"><a href="{{route('admin.authors.index')}}">Authors</a></li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

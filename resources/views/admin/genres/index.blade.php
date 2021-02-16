@@ -3,7 +3,7 @@
     <h1 class="mt-2">Genres List</h1>
     <div class="row">
         <div class="col-xs-12 my-3 mx-3">
-            <a href="{{route('admin.genre.create')}}" class="btn btn-success">Create genre</a>
+            <a href="{{route('admin.genres.create')}}" class="btn btn-success">Create genre</a>
         </div>
     </div>
     @if(count($genres))
@@ -22,9 +22,9 @@
                     <th scope="row">{{$loop->index}}</th>
                     <td>{{$genre->name}}</td>
                     <td>
-                        <a href="{{route('admin.genre.edit', [$genre])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
+                        <a href="{{route('admin.genres.edit', [$genre])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
                         @if(!count($genre->books))
-                            <form action="{{route('admin.genre.delete', [$genre])}}" method="POST">
+                            <form action="{{route('admin.genres.destroy', [$genre])}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type="submit">Delete</button>

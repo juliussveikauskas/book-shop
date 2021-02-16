@@ -5,7 +5,7 @@
     @else
         <h1 class="mt-2">Update author</h1>
     @endif
-    <form method="POST" action="  @if(!empty($author)) {{route('admin.author.update', [$author])}}@else {{route('admin.author.store')}}   @endif">
+    <form method="POST" action="  @if(!empty($author)) {{route('admin.authors.update', [$author])}}@else {{route('admin.authors.store')}}   @endif">
         @if(!empty($author))
             {{ method_field('PUT') }}
         @endif

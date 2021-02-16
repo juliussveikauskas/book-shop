@@ -13,42 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function () {
-
-    Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
-
     Auth::routes();
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\BooksController::class, 'index'])->name('index');
+    Route::resource('books', \App\Http\Controllers\BooksController::class);
 
     Route::get('admin/login', [App\Http\Controllers\Admin\AdminController::class, 'login'])->name('admin.login');
 
-    Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin', 'as' => 'admin.'], function () {
         Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
-        Route::resource('genres', App\Http\Controllers\Admin\GenresController::class)->names([
-            'index' => 'admin.genres',
-            'create' => 'admin.genre.create',
-            'store' => 'admin.genre.store',
-            'destroy' => 'admin.genre.delete',
-            'edit' => 'admin.genre.edit',
-            'update' => 'admin.genre.update'
-        ]);
-        Route::resource('authors', App\Http\Controllers\Admin\AuthorsController::class)->names([
-            'index' => 'admin.authors',
-            'create' => 'admin.author.create',
-            'store' => 'admin.author.store',
-            'destroy' => 'admin.author.delete',
-            'edit' => 'admin.author.edit',
-            'update' => 'admin.author.update'
-        ]);
-
-        Route::resource('books', App\Http\Controllers\Admin\BooksController::class)->names([
-            'index' => 'admin.books',
-            'create' => 'admin.book.create',
-            'store' => 'admin.book.store',
-            'destroy' => 'admin.book.delete',
-            'edit' => 'admin.book.edit',
-            'update' => 'admin.book.update'
-        ]);
+        Route::resource('genres', App\Http\Controllers\Admin\GenresController::class);
+        Route::resource('authors', App\Http\Controllers\Admin\AuthorsController::class);
+        Route::resource('books', App\Http\Controllers\Admin\BooksController::class);
     });
 
 });
