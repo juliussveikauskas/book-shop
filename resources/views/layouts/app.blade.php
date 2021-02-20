@@ -40,9 +40,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-{{--                                <a class="dropdown-item" href="{{ route('user.books.list') }}">--}}
-{{--                                    {{ __('My books') }}--}}
-{{--                                </a>--}}
+                                <a class="dropdown-item" href="{{ route('user.books.create') }}">
+                                    {{ __('Add book') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('user.change-password.index') }}">
                                     {{ __('Change password') }}
                                 </a>

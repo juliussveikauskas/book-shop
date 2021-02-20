@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    const ADMIN = 'ADMIN';
+    const CUSTOMER = 'CUSTOMER';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,6 +54,11 @@ class User extends Authenticatable
     public function books()
     {
         return $this->hasMany(Book::class, 'user_id');
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->role == self::ADMIN ?? null;
     }
 
 }

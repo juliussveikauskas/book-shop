@@ -51,4 +51,9 @@ class Book extends Model
     {
         return $this->where('status', self::ACTIVE);
     }
+
+    public function getIsActiveAttribute()
+    {
+        return $this->status == self::ACTIVE ?? null;
+    }
 }

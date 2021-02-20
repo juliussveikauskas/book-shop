@@ -18,9 +18,16 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
     Route::get('/', [App\Http\Controllers\BooksController::class, 'index'])->name('index');
     Route::resource('books', \App\Http\Controllers\BooksController::class);
 
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('authors', App\Http\Controllers\AuthorsController::class);
+        Route::resource('genres', App\Http\Controllers\GenresController::class);
+    });
+
     Route::group(['prefix' => 'user', 'middleware' => 'auth', 'as' => 'user.'], function () {
         Route::resource('change-password', App\Http\Controllers\User\ChangePasswordController::class);
         Route::resource('reviews', App\Http\Controllers\User\ReviewsController::class);
+        Route::resource('books', App\Http\Controllers\User\BooksController::class);
     });
 
     Route::get('admin/login', [App\Http\Controllers\Admin\AdminController::class, 'login'])->name('admin.login');
