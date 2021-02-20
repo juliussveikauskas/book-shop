@@ -48,8 +48,7 @@
             @endforeach
         </div>
     </div>
-    <div class="text-right">
-        <a class="page-navigation" href="{{ $books->previousPageUrl()}}"><i class="fas fa-angle-double-left"></i></a>
-        <a class="page-navigation" href="{{ $books->nextPageUrl() }}"><i class="fas fa-angle-double-right"></i></a>
+    <div class="books-paging">
+        {{$books->links()}}
     </div>
 @endsection

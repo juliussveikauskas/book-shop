@@ -49,7 +49,7 @@ class LoginController extends Controller
                 return '/admin';
                 break;
             default:
-                return '/member';
+                return '/';
         }
     }
 }

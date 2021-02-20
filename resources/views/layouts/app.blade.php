@@ -40,6 +40,12 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+{{--                                <a class="dropdown-item" href="{{ route('user.books.list') }}">--}}
+{{--                                    {{ __('My books') }}--}}
+{{--                                </a>--}}
+                                <a class="dropdown-item" href="{{ route('user.change-password.index') }}">
+                                    {{ __('Change password') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

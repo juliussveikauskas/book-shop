@@ -20,10 +20,6 @@
                 <label for="name">Title</label>
                 <input type="text" name="name" class="form-control" value="{{!empty($book) ? $book->name : ''}}" id="name" placeholder="Enter book title">
             </div>
-            <div class="form-group col-md-3">
-                <label for="written_at">Year written</label>
-                <input id="written_at" name="written_at" class="datepicker form-control" value="{{!empty($book) ? $book->written_at : ''}}">
-            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-5">

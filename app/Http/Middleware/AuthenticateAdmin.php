@@ -17,7 +17,7 @@ class AuthenticateAdmin extends Middleware
                     return $next($request);
                     break;
                 case 'CUSTOMER':
-                    return redirect('/member');
+                    return redirect('/');
                     break;
             }
         }

@@ -47,7 +47,7 @@ class Books
         $query = $query->orderBy('created_at', 'DESC');
 
         if(!empty($paginate)){
-            return $query->paginate();
+            return $query->simplePaginate();
         }
 
         return $query->count();
