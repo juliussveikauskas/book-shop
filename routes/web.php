@@ -27,6 +27,7 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
     Route::group(['prefix' => 'user', 'middleware' => 'auth', 'as' => 'user.'], function () {
         Route::resource('change-password', App\Http\Controllers\User\ChangePasswordController::class);
         Route::resource('reviews', App\Http\Controllers\User\ReviewsController::class);
+        Route::post('books/report', [App\Http\Controllers\User\BooksController::class, 'report'])->name('books.report');
         Route::resource('books', App\Http\Controllers\User\BooksController::class);
     });
 
@@ -35,6 +36,7 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
         Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
         Route::resource('genres', App\Http\Controllers\Admin\GenresController::class);
         Route::resource('authors', App\Http\Controllers\Admin\AuthorsController::class);
+        Route::post('books/confirm/{book}', [App\Http\Controllers\Admin\BooksController::class, 'confirm'])->name('books.confirm');
         Route::resource('books', App\Http\Controllers\Admin\BooksController::class);
     });
 

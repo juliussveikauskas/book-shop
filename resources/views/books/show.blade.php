@@ -2,6 +2,15 @@
 @section('content')
     <section class="mb-5">
 
+        @if(!empty($message))
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        {{$message}}
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <div>
@@ -21,8 +30,16 @@
                 <div>
                     @include('elements.star-rating', ['rating' => round($book->reviews_avg_rating)])
                 </div>
+                @auth
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#reportModal">
+                            Report a book
+                        </button>
+                    </div>
+                @endauth
             </div>
         </div>
+
     </section>
     @auth
         <div class="alert alert-success" role="alert">
@@ -58,5 +75,8 @@
             </div>
         </div>
     </section>
-    @include('elements.modal.review')
+    @auth
+        @include('elements.modal.review')
+        @include('elements.modal.report')
+    @endauth
 @endsection

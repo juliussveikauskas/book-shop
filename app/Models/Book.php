@@ -56,4 +56,9 @@ class Book extends Model
     {
         return $this->status == self::ACTIVE ?? null;
     }
+
+    public function getIsUnconfirmedAttribute()
+    {
+        return $this->status == self::UNCONFIRMED ?? null;
+    }
 }

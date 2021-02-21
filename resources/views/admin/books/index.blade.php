@@ -20,7 +20,15 @@
             @foreach($books as $book)
                 <tr>
                     <th scope="row">{{$loop->index}}</th>
-                    <td>{{$book->name}}
+                    <td>{{$book->name}}</td>
+                    <td>
+                        @if($book->isUnconfirmed)
+                            <form action="{{route('admin.books.confirm', [$book])}}" method="POST">
+                                @csrf
+                                <button class="btn btn-warning btn-sm" type="submit">Confirm</button>
+                            </form>
+                        @endif
+                    </td>
                     <td>
                         <a href="{{route('admin.books.edit', [$book])}}" class="btn btn-secondary btn-sm admin-edit-btn">Edit</a>
                         @if(!count($book->genres) || !count($book->authors))

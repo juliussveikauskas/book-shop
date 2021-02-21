@@ -72,7 +72,7 @@ class BooksController extends Controller
     {
         $authors = $author->orderBy('name', 'ASC')->get();
         $genres = $genre->orderBy('name', 'ASC')->get();
-        return view('admin.books.form', compact('book','authors', 'genres'));
+        return view('admin.books.form', compact('book', 'authors', 'genres'));
     }
 
     /**
@@ -97,6 +97,12 @@ class BooksController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
+        return redirect()->route('admin.books.index');
+    }
+
+    public function confirm(Book $book)
+    {
+        $book->update(['status' => Book::ACTIVE]);
         return redirect()->route('admin.books.index');
     }
 }

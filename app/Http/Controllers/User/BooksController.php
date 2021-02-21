@@ -4,11 +4,14 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookStoreRequest;
+use App\Mail\BookReport;
+use App\Mail\PurchaseConfirmation;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
 use App\Repository\Books;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BooksController extends Controller
 {
@@ -62,7 +65,7 @@ class BooksController extends Controller
     {
         $authors = $author->orderBy('name', 'ASC')->get();
         $genres = $genre->orderBy('name', 'ASC')->get();
-        return view('admin.books.form', compact('book','authors', 'genres'));
+        return view('user.books.form', compact('book', 'authors', 'genres'));
     }
 
     /**
@@ -75,7 +78,17 @@ class BooksController extends Controller
     public function update(Request $request, Book $book)
     {
         $book->update($request->all());
-        return redirect()->route('admin.books.index');
+        return redirect()->route('user.books.index');
+    }
+
+    public function report(Request $request, Book $book)
+    {
+        $book = $book->find($request->input('book_id'));
+        $comment = $request->input('comment');
+        $mail = config('mail.from.address');
+        Mail::to(config('mail.from.address'))->send(new BookReport(auth()->user(), $book, $comment));
+        $message = 'Report sent successfully!';
+        return view('books.show', compact('book', 'message'));
     }
 
 }
