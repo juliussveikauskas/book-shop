@@ -22,7 +22,11 @@
                         @if(!empty($book->discount))
                             <span class="card-discount">{{$book->discount}} %</span>
                         @endif
-                        <img class="card-img-top" src="{{asset('storage/'.$book->image)}}" alt="Card image cap">
+                        @if(!empty($book->image))
+                            <img class="card-img-top" src="{{asset('storage/'.$book->image)}}" alt="Card image cap">
+                        @else
+                            <img class="card-img-top" src="{{asset('images/default.png')}}" alt="Card image cap">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{$book->name}}</h5>
                             <p class="card-text">Author:

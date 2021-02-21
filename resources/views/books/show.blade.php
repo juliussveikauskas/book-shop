@@ -16,7 +16,11 @@
                 <div>
                     <div class="row mx-1">
                         <div class="col-12 mb-0">
-                            <img src="{{asset('storage/'.$book->image)}}">
+                            @if(!empty($book->image))
+                                <img src="{{asset('storage/'.$book->image)}}">
+                            @else
+                                <img class="card-img-top" src="{{asset('images/default.png')}}" alt="Card image cap">
+                            @endif
                         </div>
                     </div>
                 </div>
