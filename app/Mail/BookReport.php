@@ -33,7 +33,7 @@ class BookReport extends Mailable
     public function build()
     {
         return $this
-            ->from($this->user->email)
+            ->from(config('mail.from.address'))
             ->subject(trans('Book report'))
             ->view('emails.book-report');
     }

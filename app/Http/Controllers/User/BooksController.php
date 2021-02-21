@@ -77,7 +77,9 @@ class BooksController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $book->update($request->all());
+        $input = $request->all();
+        $input['status'] = Book::UNCONFIRMED;
+        $book->update($input);
         return redirect()->route('user.books.index');
     }
 
