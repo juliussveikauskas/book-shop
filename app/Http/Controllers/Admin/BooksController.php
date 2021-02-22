@@ -19,7 +19,7 @@ class BooksController extends Controller
      */
     public function index(Book $book)
     {
-        $books = $book->with('authors', 'genres')->orderBy('name', 'ASC')->paginate(20);
+        $books = $book->with('authors', 'genres')->orderBy('name')->paginate(20);
         return view('admin.books.index', compact('books'));
     }
 
@@ -70,8 +70,8 @@ class BooksController extends Controller
      */
     public function edit(Book $book, Author $author, Genre $genre)
     {
-        $authors = $author->orderBy('name', 'ASC')->get();
-        $genres = $genre->orderBy('name', 'ASC')->get();
+        $authors = $author->orderBy('name')->get();
+        $genres = $genre->orderBy('name')->get();
         return view('admin.books.form', compact('book', 'authors', 'genres'));
     }
 

@@ -22,7 +22,7 @@ class BooksController extends Controller
      */
     public function index(Book $book)
     {
-        $books = auth()->user()->books()->with('authors', 'genres')->orderBy('name', 'ASC')->paginate(20);
+        $books = auth()->user()->books()->with('authors', 'genres')->orderBy('name')->paginate(20);
         return view('user.books.index', compact('books'));
     }
 
@@ -63,8 +63,8 @@ class BooksController extends Controller
      */
     public function edit(Book $book, Author $author, Genre $genre)
     {
-        $authors = $author->orderBy('name', 'ASC')->get();
-        $genres = $genre->orderBy('name', 'ASC')->get();
+        $authors = $author->orderBy('name')->get();
+        $genres = $genre->orderBy('name')->get();
         return view('user.books.form', compact('book', 'authors', 'genres'));
     }
 
@@ -87,7 +87,6 @@ class BooksController extends Controller
     {
         $book = $book->find($request->input('book_id'));
         $comment = $request->input('comment');
-        $mail = config('mail.from.address');
         Mail::to(config('mail.from.address'))->send(new BookReport(auth()->user(), $book, $comment));
         $message = 'Report sent successfully!';
         return view('books.show', compact('book', 'message'));

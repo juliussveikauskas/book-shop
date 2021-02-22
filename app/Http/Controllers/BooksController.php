@@ -33,5 +33,4 @@ class BooksController extends Controller
         $book = $book->active()->with('reviews.user')->withAvg('reviews','rating')->findOrFail($book->id);
         return view('books.show', compact('book'));
     }
-    
 }
