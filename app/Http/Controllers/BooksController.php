@@ -17,11 +17,8 @@ class BooksController extends Controller
      */
     public function index(Request $request, Books $booksRepository)
     {
-        $input = $request->all();
-        $books = $booksRepository->activeBooks($input, true);
-        $keyword = !empty($input['search']) ? $input['search'] : null;
-
-        return view('index', compact('books', 'keyword'));
+        $books = $booksRepository->activeBooks($request->all(), true);
+        return view('index', compact('books'));
     }
 
     /**

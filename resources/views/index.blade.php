@@ -5,7 +5,7 @@
             <form>
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" name="search" class="form-control" value="{{!empty($keyword) ? $keyword : ''}}" placeholder="Search by book title or author">
+                        <input type="text" name="search" class="form-control" value="{{request('search')}}" placeholder="Search by book title or author">
                     </div>
                 </div>
             </form>
