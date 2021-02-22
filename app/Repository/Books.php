@@ -7,7 +7,7 @@ use App\Models\Book;
 class Books
 {
     /** @var Book */
-    protected $city;
+    protected $book;
 
     public function __construct(Book $book)
     {
