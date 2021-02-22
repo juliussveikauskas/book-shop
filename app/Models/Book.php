@@ -19,7 +19,7 @@ class Book extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'book_id');
+        return $this->hasMany(Review::class);
     }
 
     public function authors()
@@ -34,7 +34,7 @@ class Book extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        $this->belongsTo(User::class);
     }
 
     public function isNew()
