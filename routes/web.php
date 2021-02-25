@@ -20,13 +20,13 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
 
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('authors', App\Http\Controllers\AuthorsController::class);
-        Route::resource('genres', App\Http\Controllers\GenresController::class);
+        Route::post('authors', [App\Http\Controllers\AuthorsController::class, 'store']);
+        Route::post('genres', [App\Http\Controllers\GenresController::class, 'store']);
     });
 
     Route::group(['prefix' => 'user', 'middleware' => 'auth', 'as' => 'user.'], function () {
         Route::resource('change-password', App\Http\Controllers\User\ChangePasswordController::class);
-        Route::resource('reviews', App\Http\Controllers\User\ReviewsController::class);
+        Route::post('reviews', [App\Http\Controllers\User\ReviewsController::class, 'store'])->name('reviews.store');
         Route::post('books/report', [App\Http\Controllers\User\BooksController::class, 'report'])->name('books.report');
         Route::resource('books', App\Http\Controllers\User\BooksController::class);
     });
