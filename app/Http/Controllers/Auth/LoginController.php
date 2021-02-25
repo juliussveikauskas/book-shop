@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -40,16 +41,9 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        $role = null;
-        if (!empty(auth()->user())) {
-            $role = auth()->user()->role;
+        if(auth()->user()->role === User::ADMIN){
+            return '/admin';
         }
-        switch ($role) {
-            case 'ADMIN':
-                return '/admin';
-                break;
-            default:
-                return '/';
-        }
+        return '/';
     }
 }

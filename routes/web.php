@@ -32,7 +32,7 @@ Route::group(['prefix' => env('BASE_URL', ''), 'middleware' => 'web'], function 
     });
 
     Route::get('admin/login', [App\Http\Controllers\Admin\AdminController::class, 'login'])->name('admin.login');
-    Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin', 'as' => 'admin.'], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth','auth.admin'], 'as' => 'admin.'], function () {
         Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
         Route::resource('genres', App\Http\Controllers\Admin\GenresController::class);
         Route::resource('authors', App\Http\Controllers\Admin\AuthorsController::class);

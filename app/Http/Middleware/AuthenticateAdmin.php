@@ -10,18 +10,11 @@ class AuthenticateAdmin extends Middleware
 
     public function handle($request, \Closure $next, ...$guards)
     {
-        if (auth()->user()) {
-            $role = Auth::user()->role;
-            switch ($role) {
-                case 'ADMIN':
-                    return $next($request);
-                    break;
-                case 'CUSTOMER':
-                    return redirect('/');
-                    break;
-            }
+        if (auth()->user()->role != 'ADMIN') {
+            app()->abort(403);
         }
-        return redirect('/');
+
+        return $next($request);
     }
 
 }
