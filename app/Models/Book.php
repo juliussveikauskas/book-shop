@@ -44,7 +44,7 @@ class Book extends Model
 
     public function getDiscountedPriceAttribute()
     {
-        return round($this->price - ($this->price * ($this->discount / 100)), 2);
+        return !empty($this->discount) ? round($this->price - ($this->price * ($this->discount / 100)), 2) : $this->price;
     }
 
     public function scopeActive()
@@ -60,5 +60,10 @@ class Book extends Model
     public function getIsUnconfirmedAttribute()
     {
         return $this->status == self::UNCONFIRMED ?? null;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return !empty($this->image) ? asset('storage/' . $this->image) : asset('images/default.png');
     }
 }
