@@ -13,9 +13,9 @@ class AuthorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Author $author)
+    public function index()
     {
-        $authors = $author->orderBy('name')->paginate(20);
+        $authors = Author::orderBy('name')->paginate(20);
         return view('admin.authors.index', compact('authors'));
     }
 

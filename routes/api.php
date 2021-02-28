@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
 });
 
 Route::get('books', [App\Http\Controllers\Api\BooksController::class, 'index']);
 Route::get('books/{book}', [App\Http\Controllers\Api\BooksController::class, 'show']);
+

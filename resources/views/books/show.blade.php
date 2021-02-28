@@ -78,6 +78,9 @@
                 @endforeach
             </div>
         </div>
+        <div id="app-reviews">
+            <reviews-index></reviews-index>
+        </div>
     </section>
     @auth
         @include('elements.modal.review')

@@ -42,4 +42,11 @@ $(function () {
 
 });
 
+import Vue from 'vue'
+
+Vue.component('reviews-index', require('./components/Reviews/Index.vue').default)
+
+const appReview = new Vue({
+    el: '#app-reviews'
+});
 
